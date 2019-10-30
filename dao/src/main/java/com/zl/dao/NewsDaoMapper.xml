@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.dao.NewsDao">
+    <!--添加-->
+    <insert id="add" parameterType="news">
+        insert into news(id,newsId,title,context,newsMan,newsDate,typeId,pic)
+            values (#{id},#{newsId},#{title},#{context},#{newsMan},#{newsDate},#{typeId},#{pic})
+    </insert>
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        delete from news where id=#{id}
+    </delete>
+    <!--修改-->
+    <update id="update" parameterType="news">
+        update news set newsId=#{newsId},title=#{title},context=#{context},newsMan=#{newsMan},newsDate=#{newsDate},typeId=#{typeId},pic=#{pic} where id=#{id}
+    </update>
+    <!--根据id查询-->
+    <select id="queryNewsById" resultType="news" parameterType="int">
+        select * from news where id=#{id}
+    </select>
+    <!--分页查询-->
+    <select id="queryNewsPaging" resultType="news" parameterType="com.zl.pojo.Paging">
+        select * from (select n.*,rownum r from (select * from news
+            <where>
+                <if test="query!=null">
+                    <if test="query.title != null and query.title != '' ">
+                        and title like concat('%',concat(#{query.title},'%'))
+                    </if>
+                    <if test="query.qStartNewsDate != null">
+                        and newsDate>=#{query.qStartNewsDate}
+                    </if>
+                    <if test="query.qEndNewsDate != null">
+                        and newsDate<![CDATA[<]]>=#{query.qEndNewsDate}
+                    </if>
+                </if>
+            </where>
+        ) n) where r>=#{stripStart} and r<![CDATA[<]]>=#{stripEnd}
+    </select>
+    <!--查询总条数-->
+    <select id="queryNewsStripSum" resultType="int" parameterType="query">
+        select count(1) from NEWS
+        <where>
+            <if test="title != null and title != ''">
+                and title like concat('%',concat(#{title},'%'))
+            </if>
+            <if test="qStartNewsDate != null">
+                and newsDate>=#{qStartNewsDate}
+            </if>
+            <if test="qEndNewsDate != null">
+                and newsDate<![CDATA[<]]>=#{qEndNewsDate}
+            </if>
+        </where>
+    </select>
+</mapper>

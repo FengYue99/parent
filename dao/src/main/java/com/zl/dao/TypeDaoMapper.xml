@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.dao.TypeDao">
+    <!--查询新闻类型的所有信息-->
+    <select id="queryType" resultType="type">
+        select type_id typeId,type_name typeName from type
+    </select>
+</mapper>

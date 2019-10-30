@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+namespace:必须是对应接口的全路径
+-->
+<mapper namespace="com.zl.dao.RoleDao">
+    <resultMap id="roleAndPower" type="com.zl.pojo.Role">
+        <id property="id" column="id"></id>
+        <result property="roleId" column="role_id"></result>
+        <result property="name" column="name"></result>
+        <!--把id传给select语句,
+            ofType：映射到list集合中的类型
+            如果是collection就用ofType,是对象或者属性就用JavaType
+        -->
+        <collection property="powers" column="id" ofType="com.zl.pojo.Power" select="com.zl.dao.PowerDao.queryPowerByRole"></collection>
+        <!--select * from t_role_power rp,t_power p where rp.p_id=p.id and rp.r_id=#{id}-->
+    </resultMap>
+    <select id="queryRoleByUser" resultMap="roleAndPower" parameterType="int">
+        select * from t_role where id=#{r_id}
+    </select>
+</mapper>

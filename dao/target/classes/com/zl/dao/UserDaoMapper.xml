@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+namespace:必须是对应接口的全路径
+-->
+<mapper namespace="com.zl.dao.UserDao">
+    <!--
+        查询
+        id:必须是对应方法的名称
+        resultType:你希望mybatis把结果集封装成那个实体类
+    -->
+    <resultMap id="userAndRole" type="com.zl.pojo.User">
+        <!--配置主键的映射关系-->
+        <id property="id" column="id"></id>
+        <!--配置普通字段的映射关系 -->
+        <result property="userId" column="user_id"></result>
+        <result property="name" column="name"></result>
+        <result property="pwd" column="pwd"></result>
+        <result property="age" column="age"></result>
+        <result property="sex" column="sex"></result>
+        <!--
+            配置外键和实体类对象之间的映射关系
+            select:执行引用的那条sql语句
+                select * from t_role where id=#{r_id}
+            javaType:你引用的这条sql语句执行完成以后会封装成什么对象
+            column:你执行的这条引用的sql语句需要当前表那个字段的值
+            property:执行完结果以后赋值给该实体类中的那个属性
+        -->
+        <association property="role" column="r_id" javaType="com.zl.pojo.Role" select="com.zl.dao.RoleDao.queryRoleByUser"></association>
+    </resultMap>
+    <select id="login" resultMap="userAndRole" parameterType="com.zl.pojo.User">
+        select * from t_user where name=#{name} and pwd=#{pwd}
+    </select>
+    <select id="registerAjax" resultType="user" parameterType="string">
+        select id,user_id userId,name,pwd,age,sex from t_user where name=#{name}
+    </select>
+    <select id="loginAjax" resultType="user" parameterType="user">
+        select id,user_id userId,name,pwd,age,sex from t_user where name=#{name}
+    </select>
+    <insert id="registerAdd" parameterType="user">
+        insert into t_user(name,pwd) values(#{name},#{pwd})
+    </insert>
+</mapper>

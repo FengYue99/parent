@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--对mybatis框架的整体配置-->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<!--起别名-->
+	<typeAliases>
+		<typeAlias type="com.zl.pojo.News" alias="news"></typeAlias>
+		<typeAlias type="com.zl.pojo.User" alias="user"></typeAlias>
+		<typeAlias type="com.zl.pojo.Type" alias="type"></typeAlias>
+		<typeAlias type="com.zl.pojo.Query" alias="query"></typeAlias>
+		<typeAlias type="com.zl.pojo.Paging" alias="paging"></typeAlias>
+	</typeAliases>
+	<!--引入映射文件-->
+	<mappers>
+		<mapper resource="com/zl/dao/UserDaoMapper.xml"></mapper>
+		<mapper resource="com/zl/dao/NewsDaoMapper.xml"></mapper>
+		<mapper resource="com/zl/dao/TypeDaoMapper.xml"></mapper>
+		<mapper resource="com/zl/dao/RoleDaoMapper.xml"></mapper>
+		<mapper resource="com/zl/dao/PowerDaoMapper.xml"></mapper>
+	</mappers>
+</configuration>
