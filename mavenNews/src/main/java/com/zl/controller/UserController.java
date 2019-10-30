@@ -26,6 +26,7 @@ public class UserController {
         ModelAndView mv = new ModelAndView();
         loginUser=us.login(loginUser);
         if (loginUser!=null){
+
             if ("yes".equals(isNo)){
                 //创建cookie
                 Cookie cName = null;
