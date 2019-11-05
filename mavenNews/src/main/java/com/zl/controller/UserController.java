@@ -68,7 +68,6 @@ public class UserController {
     @RequestMapping("/loginJson")
     @ResponseBody
     public void loginJson(String name, HttpServletResponse response){
-        System.out.println(name);
         User u = us.loginAjax(name);
         String mess = null;
         System.out.println(u);

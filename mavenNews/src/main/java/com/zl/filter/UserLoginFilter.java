@@ -10,10 +10,12 @@ import java.net.URLEncoder;
 
 
 public class UserLoginFilter implements Filter {
+    @Override
     public void destroy() {
         System.out.println("用户登录过滤器销毁");
     }
 
+    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;

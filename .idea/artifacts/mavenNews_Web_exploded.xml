@@ -9,6 +9,7 @@
           <element id="module-output" name="pojo" />
           <element id="module-output" name="dao" />
           <element id="module-output" name="service" />
+          <element id="module-output" name="parent" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: net.sourceforge.cglib:com.springsource.net.sf.cglib:2.2.0" />

@@ -26,7 +26,7 @@
             if (name != null && name != "") {
                 $.ajax({
                     //url:ajax发送的请求到哪个地方
-                    url: "news/registerAjaxServlet",
+                    url: "user/loginJson",
                     //请求方式
                     type: "post",
                     //服务器需要返回的数据类型
