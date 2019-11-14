@@ -86,4 +86,26 @@ public class UserController {
         out.flush();
         out.close();
     }
+
+    @RequestMapping("/registerJson")
+    @ResponseBody
+    public void registerJson(String name, HttpServletResponse response){
+        User u = us.registerAjax(name);
+        String mess = null;
+        System.out.println(u);
+        if (u == null) {
+            mess = "{\"registerFlag\":true}";
+        } else {
+            mess = "{\"registerFlag\":false}";
+        }
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        out.write(mess);
+        out.flush();
+        out.close();
+    }
 }

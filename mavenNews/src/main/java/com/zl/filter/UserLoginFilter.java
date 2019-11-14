@@ -27,7 +27,7 @@ public class UserLoginFilter implements Filter {
         //项目的绝对路径
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
         //由于不能过滤一些特定请求，所以需要拿到该请求的路径进行判断
-        if ("/user/loginJson".equals(path) || loginUser != null || "/login.jsp".equals(path) || "/user/login".equals(path) || "/register.jsp".equals(path) || "/news/registerAjaxServlet".equals(path) ||"/news/registerServlet".equals(path) || "/news/loginAjax".equals(path)) {
+        if ("/user/registerJson".equals(path)||"/user/loginJson".equals(path) || loginUser != null || "/login.jsp".equals(path) || "/user/login".equals(path) || "/register.jsp".equals(path) || "/news/registerAjaxServlet".equals(path) ||"/news/registerServlet".equals(path) || "/news/loginAjax".equals(path)) {
             chain.doFilter(request, response);
         } else {
             //访问的是项目的绝对路径加上要访问的页面，不会出现404的情况
